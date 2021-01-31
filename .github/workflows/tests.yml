@@ -27,8 +27,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.3, 7.4]
-        stability: [prefer-lowest, prefer-stable]
+        php: [7.2.5, 7.3, 7.4, 8.0]
+        laravel: [^6.0, ^7.0, ^8.0]
+        exclude:
+          - php: 7.2.5
+            laravel: ^8.0
 
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
 
@@ -48,7 +51,9 @@ jobs:
         uses: niden/actions-memcached@v7
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+        run: |
+           composer require "illuminate/contracts=${{ matrix.laravel }}" --no-update
+           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
@@ -62,12 +67,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.3, 7.4]
-        include:
-          - php: 7.3
-            stability: prefer-lowest
-          - php: 7.4
-            stability: prefer-stable
+        php: [7.2/5, 7.3, 7.4, 8.0]
+        laravel: [^6.0, ^7.0, ^8.0]
+        exclude:
+          - php: 7.2.5
+            laravel: ^8.0
 
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }} - Windows
 
@@ -89,7 +93,9 @@ jobs:
           ini-values: memory_limit=512M
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+        run: |
+           composer require "illuminate/contracts=${{ matrix.laravel }}" --no-update
+           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
