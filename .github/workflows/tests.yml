@@ -47,9 +47,6 @@ jobs:
           tools: composer:v2
           coverage: none
 
-      - name: Setup Memcached
-        uses: niden/actions-memcached@v7
-
       - name: Install dependencies
         run: |
            composer require "illuminate/contracts=${{ matrix.laravel }}" --no-update
@@ -67,11 +64,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.2, 7.3, 7.4, 8.0]
-        laravel: [^6.0, ^7.0, ^8.0]
+        php: ['7.2', '7.3', '7.4', '8.0']
+        laravel: ['^6.0', '^7.0', '^8.0']
         exclude:
-          - php: 7.2
-            laravel: ^8.0
+          - php: '7.2'
+            laravel: '^8.0'
 
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }} - Windows
 
