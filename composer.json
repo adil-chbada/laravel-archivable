@@ -1,5 +1,5 @@
 {
-    "name": "joelbutcher/laravel-archivable",
+    "name": "joelbutcher/laravel-archivable2",
     "description": "An archivable trait package for Laravel Eloquent models",
     "keywords": ["laravel", "laravel-archivable"],
     "license": "MIT",
@@ -16,14 +16,8 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "illuminate/support": "^8.0",
-        "illuminate/database": "^8.0"
     },
     "require-dev": {
-        "illuminate/pagination": "^8.0",
-        "orchestra/testbench": "^6.3",
-        "phpunit/phpunit": "^8.4|^9.0"
     },
     "autoload": {
         "psr-4": {
